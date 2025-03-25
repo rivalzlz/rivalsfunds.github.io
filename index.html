@@ -162,25 +162,30 @@
   </div>
 </div>
 
-<!-- Firebase SDK -->
+<!-- Firebase SDK v9 (compatible with your config) -->
 <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics-compat.js"></script>
 
 <script>
-  // Initialize Firebase - REPLACE WITH YOUR CONFIG!
+  // Your Firebase config
   const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
+    apiKey: "AIzaSyBJb3wti1l2YagyL3x9-QR5Gg_GPzDjqjo",
     authDomain: "viewcount-349bf.firebaseapp.com",
-    databaseURL: "https://viewcount-349bf.firebaseio.com",
+    databaseURL: "https://viewcount-349bf-default-rtdb.firebaseio.com",
     projectId: "viewcount-349bf",
-    storageBucket: "viewcount-349bf.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    storageBucket: "viewcount-349bf.firebasestorage.app",
+    messagingSenderId: "460514707834",
+    appId: "1:460514707834:web:b5c2a5a44bcbbf656f2ec3",
+    measurementId: "G-DV62N4YFY7"
   };
-  firebase.initializeApp(firebaseConfig);
+
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const analytics = firebase.analytics(app);
+  const db = firebase.database();
 
   // View counter logic
-  const db = firebase.database();
   const counterRef = db.ref('viewCounter');
   
   // Increment counter on page load
@@ -192,6 +197,9 @@
   counterRef.on('value', (snapshot) => {
     document.getElementById('viewCounter').textContent = snapshot.val();
   });
+
+  // Track page view in Analytics
+  analytics.logEvent('page_view');
 
   // Your existing cursor and stars code
   document.addEventListener('mousemove',(e)=>{
