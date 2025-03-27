@@ -162,13 +162,13 @@
   </div>
 </div>
 
-<!-- Firebase SDK v9 (compatible with your config) -->
+
 <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics-compat.js"></script>
 
 <script>
-  // Your Firebase config
+
   const firebaseConfig = {
     apiKey: "AIzaSyBJb3wti1l2YagyL3x9-QR5Gg_GPzDjqjo",
     authDomain: "viewcount-349bf.firebaseapp.com",
@@ -180,28 +180,28 @@
     measurementId: "G-DV62N4YFY7"
   };
 
-  // Initialize Firebase
+
   const app = firebase.initializeApp(firebaseConfig);
   const analytics = firebase.analytics(app);
   const db = firebase.database();
 
-  // View counter logic
+
   const counterRef = db.ref('viewCounter');
+
   
-  // Increment counter on page load
   counterRef.transaction((current) => {
     return (current || 0) + 1;
   });
   
-  // Update displayed count in real-time
+
   counterRef.on('value', (snapshot) => {
     document.getElementById('viewCounter').textContent = snapshot.val();
   });
 
-  // Track page view in Analytics
+
   analytics.logEvent('page_view');
 
-  // Your existing cursor and stars code
+
   document.addEventListener('mousemove',(e)=>{
     const t=document.getElementById('custom-cursor');
     t.style.left=e.clientX-16+'px';
